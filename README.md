@@ -12,70 +12,11 @@ Application web progressive (PWA) de chronomètre fitness avec monitoring cardia
 - `icon-192.png` - Icône 192x192
 - `icon-512.png` - Icône 512x512
 
-## 🚀 Installation
-
-### Option 1 : GitHub Pages (Recommandé)
-
-1. **Créer un repo GitHub**
-   ```bash
-   # Créer un nouveau repo public sur GitHub
-   # Exemple : chrono-fitness
-   ```
-
-2. **Uploader les fichiers**
-   - Glisse-dépose tous les fichiers dans ton repo
-   - Ou via Git :
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/TON-USERNAME/chrono-fitness.git
-   git push -u origin main
-   ```
-
-3. **Activer GitHub Pages**
-   - Va dans Settings > Pages
-   - Source : Deploy from a branch
-   - Branch : main / (root)
-   - Save
-
-4. **Accéder à l'app**
-   - URL : `https://TON-USERNAME.github.io/chrono-fitness/chrono-fitness-hr.html`
-   - L'app est maintenant accessible en HTTPS (requis pour Bluetooth)
-
-### Option 2 : Hébergement local avec HTTPS
-
-Si tu veux tester en local avec HTTPS (nécessaire pour Bluetooth) :
-
-```bash
-# Installer un serveur HTTPS simple
-npm install -g local-web-server
-cd /chemin/vers/les/fichiers
-ws --https
-```
-
-Ou avec Python :
-```bash
-# Générer un certificat auto-signé
-openssl req -new -x509 -keyout server.pem -out server.pem -days 365 -nodes
-
-# Lancer le serveur
-python3 << 'EOF'
-import http.server, ssl
-server_address = ('localhost', 4443)
-httpd = http.server.HTTPServer(server_address, http.server.SimpleHTTPRequestHandler)
-httpd.socket = ssl.wrap_socket(httpd.socket, certfile='./server.pem', server_side=True)
-print("Serveur HTTPS sur https://localhost:4443")
-httpd.serve_forever()
-EOF
-```
-
 ## 📱 Installer sur mobile
 
 ### Android (Vivaldi / Chrome)
 
-1. Ouvre l'URL de ton app (GitHub Pages ou local)
+1. Ouvre [l'URL de ton app](https://parksto.github.io/fitness-chrono/chrono-fitness-hr.html)
 2. Menu (⋮) > **"Ajouter à l'écran d'accueil"** ou **"Installer l'application"**
 3. Confirme l'installation
 4. L'app apparaît sur ton écran d'accueil comme une vraie app !
