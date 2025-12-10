@@ -16,14 +16,14 @@ Application web progressive (PWA) de chronomètre fitness avec monitoring cardia
 
 ### Android (Vivaldi / Chrome)
 
-1. Ouvre [l'appli](https://parksto.github.io/chrono-fitness/chrono-fitness-hr.html)
+1. Ouvre [l'appli](https://parksto.github.io/fitness-chrono/chrono-fitness-hr.html)
 2. Menu (⋮) > **"Ajouter à l'écran d'accueil"** ou **"Installer l'application"**
 3. Confirme l'installation
 4. L'app apparaît sur ton écran d'accueil comme une vraie app !
 
 ### iOS (Safari)
 
-1. Ouvre [l'appli](https://parksto.github.io/chrono-fitness/chrono-fitness-hr.html)
+1. Ouvre [l'appli](https://parksto.github.io/fitness-chrono/chrono-fitness-hr.html)
 2. Bouton Partage (carré avec flèche) > **"Sur l'écran d'accueil"**
 3. Ajoute
 4. L'app est installée !
