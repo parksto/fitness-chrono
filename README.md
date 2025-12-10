@@ -1,0 +1,148 @@
+# Chrono Fitness RC - PWA 💓⏱️
+
+## 🎯 Qu'est-ce que c'est ?
+
+Application web progressive (PWA) de chronomètre fitness avec monitoring cardiaque Bluetooth en temps réel.
+
+## 📦 Fichiers inclus
+
+- `chrono-fitness-hr.html` - Application principale
+- `manifest.json` - Métadonnées de l'app (nom, icônes, couleurs)
+- `sw.js` - Service Worker (cache et mode offline)
+- `icon-192.png` - Icône 192x192
+- `icon-512.png` - Icône 512x512
+
+## 🚀 Installation
+
+### Option 1 : GitHub Pages (Recommandé)
+
+1. **Créer un repo GitHub**
+   ```bash
+   # Créer un nouveau repo public sur GitHub
+   # Exemple : chrono-fitness
+   ```
+
+2. **Uploader les fichiers**
+   - Glisse-dépose tous les fichiers dans ton repo
+   - Ou via Git :
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git branch -M main
+   git remote add origin https://github.com/TON-USERNAME/chrono-fitness.git
+   git push -u origin main
+   ```
+
+3. **Activer GitHub Pages**
+   - Va dans Settings > Pages
+   - Source : Deploy from a branch
+   - Branch : main / (root)
+   - Save
+
+4. **Accéder à l'app**
+   - URL : `https://TON-USERNAME.github.io/chrono-fitness/chrono-fitness-hr.html`
+   - L'app est maintenant accessible en HTTPS (requis pour Bluetooth)
+
+### Option 2 : Hébergement local avec HTTPS
+
+Si tu veux tester en local avec HTTPS (nécessaire pour Bluetooth) :
+
+```bash
+# Installer un serveur HTTPS simple
+npm install -g local-web-server
+cd /chemin/vers/les/fichiers
+ws --https
+```
+
+Ou avec Python :
+```bash
+# Générer un certificat auto-signé
+openssl req -new -x509 -keyout server.pem -out server.pem -days 365 -nodes
+
+# Lancer le serveur
+python3 << 'EOF'
+import http.server, ssl
+server_address = ('localhost', 4443)
+httpd = http.server.HTTPServer(server_address, http.server.SimpleHTTPRequestHandler)
+httpd.socket = ssl.wrap_socket(httpd.socket, certfile='./server.pem', server_side=True)
+print("Serveur HTTPS sur https://localhost:4443")
+httpd.serve_forever()
+EOF
+```
+
+## 📱 Installer sur mobile
+
+### Android (Vivaldi / Chrome)
+
+1. Ouvre l'URL de ton app (GitHub Pages ou local)
+2. Menu (⋮) > **"Ajouter à l'écran d'accueil"** ou **"Installer l'application"**
+3. Confirme l'installation
+4. L'app apparaît sur ton écran d'accueil comme une vraie app !
+
+### iOS (Safari)
+
+1. Ouvre l'URL dans Safari
+2. Bouton Partage (carré avec flèche) > **"Sur l'écran d'accueil"**
+3. Ajoute
+4. L'app est installée !
+
+## ✨ Fonctionnalités PWA
+
+- ✅ **Installation** : Icône sur l'écran d'accueil
+- ✅ **Mode standalone** : Plein écran sans barre de navigateur
+- ✅ **Mode offline** : L'app fonctionne sans connexion Internet (après 1ère visite)
+- ✅ **Cache intelligent** : Mises à jour automatiques
+- ✅ **Bluetooth** : Connexion aux capteurs cardiaques
+
+## 🔧 Utilisation
+
+1. **Ouvre l'app** depuis ton écran d'accueil
+2. **Menu (☰)** : Connecte ta montre Bluetooth
+3. **Tap sur le RC** : Reset le chronomètre
+4. **Personnalise** : Zones de FC et couleurs dans les paramètres
+
+## 🎨 Personnalisation
+
+- Toutes les zones de fréquence cardiaque sont modifiables
+- Couleurs personnalisables avec color picker
+- Sauvegarde automatique en localStorage
+- Transitions de couleur progressives
+
+## 🔄 Mise à jour
+
+Pour mettre à jour l'app :
+1. Modifie les fichiers sur GitHub
+2. Change la version dans `sw.js` : `const CACHE_NAME = 'chrono-fitness-v2';`
+3. Les utilisateurs recevront automatiquement la mise à jour
+
+## 🐛 Dépannage
+
+**Bluetooth ne fonctionne pas**
+- Vérifie que tu es en HTTPS (pas HTTP)
+- Active le Bluetooth sur ton téléphone
+- Autorise l'accès Bluetooth dans les permissions du navigateur
+
+**L'app ne s'installe pas**
+- Vérifie que tu es en HTTPS
+- Sur iOS : utilise Safari (pas Chrome)
+- Vide le cache et réessaie
+
+**Mode offline ne fonctionne pas**
+- Visite l'app une première fois avec Internet
+- Le Service Worker se met en cache automatiquement
+- Ensuite ça marche offline !
+
+## 📊 Zones de FC par défaut
+
+- ⚪ Repos : 0-85 bpm (blanc)
+- 🔵 Échauffement : 86-101 bpm (bleu)
+- 🟢 Brûlage graisses : 102-118 bpm (vert)
+- 🟡 Aérobie : 119-134 bpm (jaune)
+- 🟠 Anaérobie : 135-152 bpm (orange)
+- 🔴 Extrême : 153-170 bpm (rouge)
+- 🔴 Danger : 170+ bpm (rouge intense)
+
+---
+
+**Profite de tes sessions fitness ! 💪**
