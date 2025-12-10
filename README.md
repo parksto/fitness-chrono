@@ -1,3 +1,7 @@
+<p align="center">
+     <img src=".github/github-preview.png" alt="Chrono Fitness RC" width="100%">
+   </p>
+
 # 💓⏱️ Chrono Fitness RC
 
 > Chronomètre fitness minimaliste avec monitoring cardiaque Bluetooth en temps réel
