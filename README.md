@@ -50,13 +50,6 @@ Application web progressive (PWA) de chronomètre fitness avec monitoring cardia
 - Sauvegarde automatique en localStorage
 - Transitions de couleur progressives
 
-## 🔄 Mise à jour
-
-Pour mettre à jour l'app :
-1. Modifie les fichiers sur GitHub
-2. Change la version dans `sw.js` : `const CACHE_NAME = 'chrono-fitness-v2';`
-3. Les utilisateurs recevront automatiquement la mise à jour
-
 ## 🐛 Dépannage
 
 **Bluetooth ne fonctionne pas**
