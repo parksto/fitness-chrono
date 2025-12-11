@@ -12,7 +12,23 @@
   <link rel="apple-touch-icon" href="./icon-192.png" />
   <title>Chrono RC</title>
   <style>
-    html,body{height:100%;margin:0;background:#000;color:#fff;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,Helvetica,monospace}
+    @font-face {
+      font-family: 'Sto Fixed';
+      src: url('./Sto-Fixed.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Sto';
+      src: url('./sto.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    html,body{height:100%;margin:0;background:#000;color:#fff;font-family:'Sto',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,Helvetica,monospace}
     body{display:flex;align-items:center;justify-content:center;position:relative}
     
     /* Bouton menu hamburger en haut à droite */
@@ -168,6 +184,7 @@
     
     /* Chrono (secondaire, en haut) */
     .time{
+      font-family: 'Sto Fixed', monospace;
       font-weight:700;
       font-variant-numeric:tabular-nums;
       text-align:center;
@@ -182,6 +199,7 @@
     
     /* Fréquence cardiaque (principale) */
     .hr{
+      font-family: 'Sto Fixed', monospace;
       font-weight:700;
       font-variant-numeric:tabular-nums;
       text-align:center;
@@ -329,7 +347,7 @@
   
   <div id="screen" aria-hidden="false">
     <div id="time" class="time">00:00</div>
-    <div id="hr" class="hr inactive"><span class="heart">🫀</span><span id="hrValue">---</span></div>
+    <div id="hr" class="hr inactive"><span class="heart">❤️</span><span id="hrValue">---</span></div>
   </div>
 
   <script>
@@ -587,6 +605,9 @@
         btConnectBtn.classList.remove('connecting');
         btConnectBtn.classList.add('connected');
         btConnectBtn.textContent = 'Déconnecter';
+        
+        // Fermer le menu automatiquement après connexion réussie
+        toggleSettings();
         
       }catch(error){
         console.error('Erreur Bluetooth:', error);
