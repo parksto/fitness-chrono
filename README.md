@@ -10,12 +10,6 @@
 [![Bluetooth](https://img.shields.io/badge/Bluetooth-Compatible-blue)](https://parksto.github.io/fitness-chrono/chrono-fitness-hr.html)
 [![Offline](https://img.shields.io/badge/Mode-Offline-orange)](https://parksto.github.io/fitness-chrono/chrono-fitness-hr.html)
 
-## 🚀 Essayer maintenant
-
-**👉 [Lancer l'application](https://parksto.github.io/fitness-chrono/chrono-fitness-hr.html)**
-
-Compatible avec tous les navigateurs modernes (Chrome, Edge, Vivaldi, Safari)
-
 ## ✨ Fonctionnalités
 
 - 🔵 **Connexion Bluetooth** - Compatible avec les capteurs cardiaques standard (Heart Rate Service)
@@ -24,6 +18,18 @@ Compatible avec tous les navigateurs modernes (Chrome, Edge, Vivaldi, Safari)
 - 📱 **Application installable** - Ajoute-la sur ton écran d'accueil comme une app native
 - 🌐 **Mode offline** - Fonctionne sans connexion après la première visite
 - 🎯 **Interface minimaliste** - Focus sur l'essentiel : ton rythme cardiaque et le temps
+
+## 📱 Démo
+
+https://github.com/user-attachments/assets/7dbd30b7-606c-4011-9c13-afd942ddf6b3
+
+*Application en action : connexion Bluetooth, affichage temps réel de la fréquence cardiaque avec zones colorées et animation de fond pulsante*
+
+## 🚀 Essayer maintenant
+
+**👉 [Lancer l'application](https://parksto.github.io/fitness-chrono/chrono-fitness-hr.html)**
+
+Compatible avec tous les navigateurs modernes (Chrome, Edge, Vivaldi, Safari)
 
 ## 📱 Installation
 
