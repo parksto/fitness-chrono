@@ -53,6 +53,11 @@
     }
     #menuBtn:active{background:rgba(255,255,255,0.2);opacity:1}
     
+    /* Force l'affichage en mode portrait */
+    @media (orientation: portrait){
+      #menuBtn{display:flex}
+    }
+    
     /* Cache le menu en mode paysage */
     @media (orientation: landscape){
       #menuBtn{display:none}

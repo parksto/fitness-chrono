@@ -1,4 +1,4 @@
-const CACHE_NAME = 'chrono-fitness-v4.01';
+const CACHE_NAME = 'chrono-fitness-v5';
 const urlsToCache = [
   './chrono-fitness-hr.html',
   './manifest.json',
