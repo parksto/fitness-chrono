@@ -209,19 +209,21 @@
       justify-content:center;
       gap:clamp(12px,2vh,24px);
       position:relative;
+      isolation:isolate;
     }
     
     /* Dégradé pulsant en arrière-plan */
     .hr::before{
       content:'';
       position:absolute;
-      width:150%;
-      height:150%;
-      background:radial-gradient(circle, rgba(255,40,40,0.25) 0%, rgba(255,40,40,0.08) 40%, transparent 70%);
+      width:200%;
+      height:200%;
+      background:radial-gradient(circle, rgba(255,50,50,0.4) 0%, rgba(255,50,50,0.15) 35%, transparent 60%);
       border-radius:50%;
       z-index:-1;
       animation: pulseGlow var(--pulse-duration, 1s) ease-in-out infinite;
       transition:all 0.3s ease;
+      pointer-events:none;
     }
     
     @keyframes pulseGlow{
