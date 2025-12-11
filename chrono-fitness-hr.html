@@ -173,11 +173,11 @@
       text-align:center;
       line-height:1;
       cursor:pointer;
-      opacity:0.4;
+      opacity:0.7;
     }
-    .time{font-size:clamp(32px,8vh,80px)}
+    .time{font-size:clamp(40px,10vh,100px)}
     @media (orientation: landscape){
-      .time{font-size:clamp(48px,12vh,120px)}
+      .time{font-size:clamp(56px,14vh,140px)}
     }
     
     /* Fréquence cardiaque (principale) */
@@ -186,12 +186,39 @@
       font-variant-numeric:tabular-nums;
       text-align:center;
       line-height:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:clamp(12px,2vh,24px);
     }
     .hr{font-size:clamp(64px,20vh,220px)}
     @media (orientation: landscape){
       .hr{font-size:clamp(80px,32vh,360px)}
     }
     .hr.inactive{opacity:0.3}
+    
+    /* Cœur pulsant */
+    .heart{
+      display:inline-block;
+      animation: heartbeat 1s ease-in-out infinite;
+      font-size:0.8em;
+    }
+    
+    @keyframes heartbeat{
+      0%, 100%{
+        transform:scale(1);
+        opacity:1;
+      }
+      50%{
+        transform:scale(1.15);
+        opacity:0.85;
+      }
+    }
+    
+    .hr.inactive .heart{
+      animation:none;
+      opacity:0.3;
+    }
     
     *{-webkit-tap-highlight-color: transparent}
   </style>
@@ -302,12 +329,14 @@
   
   <div id="screen" aria-hidden="false">
     <div id="time" class="time">00:00</div>
-    <div id="hr" class="hr inactive">--- <small>BPM</small></div>
+    <div id="hr" class="hr inactive"><span class="heart">❤️</span><span id="hrValue">---</span></div>
   </div>
 
   <script>
     const timeEl = document.getElementById('time');
     const hrEl = document.getElementById('hr');
+    const hrValueEl = document.getElementById('hrValue');
+    const heartEl = hrEl.querySelector('.heart');
     const menuBtn = document.getElementById('menuBtn');
     const settingsPanel = document.getElementById('settingsPanel');
     const closeOverlay = document.getElementById('closeOverlay');
@@ -503,14 +532,21 @@
 
     function updateHR(bpm){
       hrEl.classList.remove('inactive');
-      hrEl.innerHTML = `${bpm} <small>BPM</small>`;
+      hrValueEl.textContent = bpm;
       hrEl.style.color = getHRColor(bpm);
+      
+      // Calculer la durée de l'animation en fonction du BPM
+      // bpm battements par minute = bpm/60 battements par seconde
+      // donc 1 battement prend 60/bpm secondes
+      const animationDuration = 60 / bpm;
+      heartEl.style.animationDuration = `${animationDuration}s`;
     }
 
     function clearHR(){
       hrEl.classList.add('inactive');
-      hrEl.innerHTML = '--- <small>BPM</small>';
+      hrValueEl.textContent = '---';
       hrEl.style.color = '#fff';
+      heartEl.style.animationDuration = '1s';
     }
 
     async function connectBluetooth(){
