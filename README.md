@@ -1,6 +1,6 @@
 <p align="center">
-     <img src=".github/github-preview.png" alt="Chrono Fitness RC" width="100%">
-   </p>
+  <img src="assets/github-preview.png" alt="Chrono Fitness RC" width="100%">
+</p>
 
 # 💓⏱️ Chrono Fitness RC
 
