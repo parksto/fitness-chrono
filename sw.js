@@ -1,7 +1,9 @@
-const CACHE_NAME = 'chrono-fitness-v3b';
+const CACHE_NAME = 'chrono-fitness-v4';
 const urlsToCache = [
   './chrono-fitness-hr.html',
-  './manifest.json'
+  './manifest.json',
+  './Sto-Fixed.ttf',
+  './sto.ttf'
 ];
 
 // Installation du service worker

@@ -208,34 +208,41 @@
       align-items:center;
       justify-content:center;
       gap:clamp(12px,2vh,24px);
+      position:relative;
     }
+    
+    /* Dégradé pulsant en arrière-plan */
+    .hr::before{
+      content:'';
+      position:absolute;
+      width:150%;
+      height:150%;
+      background:radial-gradient(circle, rgba(255,40,40,0.25) 0%, rgba(255,40,40,0.08) 40%, transparent 70%);
+      border-radius:50%;
+      z-index:-1;
+      animation: pulseGlow var(--pulse-duration, 1s) ease-in-out infinite;
+      transition:all 0.3s ease;
+    }
+    
+    @keyframes pulseGlow{
+      0%, 100%{
+        transform:scale(0.95);
+        opacity:0.6;
+      }
+      50%{
+        transform:scale(1.1);
+        opacity:1;
+      }
+    }
+    
     .hr{font-size:clamp(64px,20vh,220px)}
     @media (orientation: landscape){
       .hr{font-size:clamp(80px,32vh,360px)}
     }
     .hr.inactive{opacity:0.3}
-    
-    /* Cœur pulsant */
-    .heart{
-      display:inline-block;
-      animation: heartbeat 1s ease-in-out infinite;
-      font-size:0.6em;
-    }
-    
-    @keyframes heartbeat{
-      0%, 100%{
-        transform:scale(1);
-        opacity:0.7;
-      }
-      50%{
-        transform:scale(1.2);
-        opacity:1;
-      }
-    }
-    
-    .hr.inactive .heart{
+    .hr.inactive::before{
       animation:none;
-      opacity:0.3;
+      opacity:0;
     }
     
     *{-webkit-tap-highlight-color: transparent}
@@ -347,14 +354,13 @@
   
   <div id="screen" aria-hidden="false">
     <div id="time" class="time">00:00</div>
-    <div id="hr" class="hr inactive"><span class="heart">❤️</span><span id="hrValue">---</span></div>
+    <div id="hr" class="hr inactive"><span id="hrValue">---</span></div>
   </div>
 
   <script>
     const timeEl = document.getElementById('time');
     const hrEl = document.getElementById('hr');
     const hrValueEl = document.getElementById('hrValue');
-    const heartEl = hrEl.querySelector('.heart');
     const menuBtn = document.getElementById('menuBtn');
     const settingsPanel = document.getElementById('settingsPanel');
     const closeOverlay = document.getElementById('closeOverlay');
@@ -557,14 +563,14 @@
       // bpm battements par minute = bpm/60 battements par seconde
       // donc 1 battement prend 60/bpm secondes
       const animationDuration = 60 / bpm;
-      heartEl.style.animationDuration = `${animationDuration}s`;
+      hrEl.style.setProperty('--pulse-duration', `${animationDuration}s`);
     }
 
     function clearHR(){
       hrEl.classList.add('inactive');
       hrValueEl.textContent = '---';
       hrEl.style.color = '#fff';
-      heartEl.style.animationDuration = '1s';
+      hrEl.style.setProperty('--pulse-duration', '1s');
     }
 
     async function connectBluetooth(){
