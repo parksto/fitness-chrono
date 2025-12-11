@@ -23,7 +23,7 @@
 
 https://github.com/user-attachments/assets/7dbd30b7-606c-4011-9c13-afd942ddf6b3
 
-*Application en action : connexion Bluetooth, affichage temps réel de la fréquence cardiaque avec zones colorées et animation de fond pulsante*
+*Application en action : connexion Bluetooth, affichage temps réel de la fréquence cardiaque avec zones colorées et animation de fond pulsante au rythme du cœur*
 
 ## 🚀 Essayer maintenant
 
