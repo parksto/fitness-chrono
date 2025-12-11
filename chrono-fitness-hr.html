@@ -28,8 +28,8 @@
       font-display: swap;
     }
     
-    html,body{height:100%;margin:0;background:#000;color:#fff;font-family:'Sto',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,Helvetica,monospace}
-    body{display:flex;align-items:center;justify-content:center;position:relative}
+    html,body{height:100%;margin:0;padding:0;background:#000;color:#fff;font-family:'Sto',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,Helvetica,monospace;overflow:hidden}
+    body{display:flex;align-items:center;justify-content:center}
     
     /* Bouton menu hamburger en haut à droite */
     #menuBtn{
@@ -185,7 +185,9 @@
       -webkit-user-select:none;
       user-select:none;
       gap:clamp(12px,3vh,32px);
-      position:relative;
+      position:absolute;
+      top:0;
+      left:0;
       z-index:1;
     }
     
