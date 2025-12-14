@@ -462,6 +462,19 @@
     menuBtn.addEventListener('click', toggleSettings);
     closeOverlay.addEventListener('click', toggleSettings);
 
+    // Forcer l'affichage du menu en mode portrait au chargement
+    function updateMenuVisibility(){
+      const isLandscape = window.matchMedia('(orientation: landscape)').matches;
+      menuBtn.style.display = isLandscape ? 'none' : 'flex';
+    }
+
+    // Appliquer au chargement
+    updateMenuVisibility();
+
+    // Écouter les changements d'orientation
+    window.matchMedia('(orientation: portrait)').addEventListener('change', updateMenuVisibility);
+    window.matchMedia('(orientation: landscape)').addEventListener('change', updateMenuVisibility);
+
     // ===== CHRONO =====
     let startTs = performance.now();
     let lastSec = -1;
