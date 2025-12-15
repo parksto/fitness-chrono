@@ -224,33 +224,21 @@
       left:50%;
       width:max(120vh, 120vw);
       height:max(120vh, 120vw);
-      transform:translate(-50%, -50%);
+      transform:translate(-50%, -50%) scale(var(--pulse-scale, 0.95));
       background:radial-gradient(circle, rgba(255,50,50,0.4) 0%, rgba(255,50,50,0.15) 35%, transparent 60%);
       border-radius:50%;
       z-index:-1;
-      animation: pulseGlow var(--pulse-duration, 1s) ease-in-out infinite;
-      transition:all 0.3s ease;
+      opacity:var(--pulse-opacity, 0.6);
+      transition:background 0.3s ease;
       pointer-events:none;
     }
-    
-    @keyframes pulseGlow{
-      0%, 100%{
-        transform:translate(-50%, -50%) scale(0.95);
-        opacity:0.6;
-      }
-      50%{
-        transform:translate(-50%, -50%) scale(1.1);
-        opacity:1;
-      }
-    }
-    
+
     .hr{font-size:clamp(64px,20vh,220px)}
     @media (orientation: landscape){
       .hr{font-size:clamp(80px,32vh,360px)}
     }
     .hr.inactive{opacity:0.3}
     .hr.inactive::before{
-      animation:none;
       opacity:0;
     }
     
@@ -629,6 +617,50 @@
       if(e.key.toLowerCase()==='m'){ toggleSettings(); }
     });
 
+    // ===== ANIMATION PULSATION CONTINUE =====
+    let currentBPM = 0;
+    let pulsePhase = 0; // Phase actuelle de 0 à 1
+    let lastPulseTime = performance.now();
+
+    function animatePulse(){
+      if(currentBPM <= 0){
+        requestAnimationFrame(animatePulse);
+        return;
+      }
+
+      const now = performance.now();
+      const elapsed = now - lastPulseTime;
+
+      // Calculer combien de temps prend un battement complet (en ms)
+      const beatDuration = (60 / currentBPM) * 1000;
+
+      // Avancer la phase en fonction du temps écoulé
+      pulsePhase = (pulsePhase + (elapsed / beatDuration)) % 1;
+      lastPulseTime = now;
+
+      // Calculer scale et opacity avec une fonction sinusoïdale pour un mouvement fluide
+      // Phase 0 -> 0.5 : expansion, Phase 0.5 -> 1 : contraction
+      const t = pulsePhase * Math.PI * 2; // Convertir en radians (0 à 2π)
+      const wave = (Math.sin(t) + 1) / 2; // Oscillation de 0 à 1
+
+      const scale = 0.95 + (wave * 0.15); // De 0.95 à 1.1
+      const opacity = 0.6 + (wave * 0.4); // De 0.6 à 1
+
+      // Appliquer la transformation
+      const glowEl = document.querySelector('.hr::before');
+      hrEl.style.setProperty('--pulse-scale', scale);
+      hrEl.style.setProperty('--pulse-opacity', opacity);
+
+      // Utiliser des custom properties CSS
+      document.documentElement.style.setProperty('--pulse-scale', scale);
+      document.documentElement.style.setProperty('--pulse-opacity', opacity);
+
+      requestAnimationFrame(animatePulse);
+    }
+
+    // Démarrer l'animation
+    requestAnimationFrame(animatePulse);
+
     // ===== BLUETOOTH HEART RATE =====
     let btDevice = null;
     let btServer = null;
@@ -672,11 +704,8 @@
       hrEl.style.color = color;
       timeEl.style.color = color;
 
-      // Calculer la durée de l'animation en fonction du BPM
-      // bpm battements par minute = bpm/60 battements par seconde
-      // donc 1 battement prend 60/bpm secondes
-      const animationDuration = 60 / bpm;
-      hrEl.style.setProperty('--pulse-duration', `${animationDuration}s`);
+      // Mettre à jour le BPM pour l'animation continue
+      currentBPM = bpm;
     }
 
     function clearHR(){
@@ -684,7 +713,11 @@
       hrValueEl.textContent = '---';
       hrEl.style.color = '#fff';
       timeEl.style.color = '#fff';
-      hrEl.style.setProperty('--pulse-duration', '1s');
+
+      // Arrêter l'animation
+      currentBPM = 0;
+      document.documentElement.style.setProperty('--pulse-scale', 0.95);
+      document.documentElement.style.setProperty('--pulse-opacity', 0);
     }
 
     async function connectBluetooth(){
