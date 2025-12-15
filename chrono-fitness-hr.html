@@ -580,6 +580,7 @@
       mouseStartX = ev.clientX;
       mouseStartY = ev.clientY;
       isMouseDown = true;
+      ev.preventDefault();
     }
 
     function onMouseUp(ev){
@@ -603,11 +604,12 @@
     timeEl.addEventListener('touchstart', onTouchStart, {passive:false});
     timeEl.addEventListener('touchend', onTouchEnd, {passive:false});
     timeEl.addEventListener('mousedown', onMouseDown);
-    timeEl.addEventListener('mouseup', onMouseUp);
     hrEl.addEventListener('touchstart', onTouchStart, {passive:false});
     hrEl.addEventListener('touchend', onTouchEnd, {passive:false});
     hrEl.addEventListener('mousedown', onMouseDown);
-    hrEl.addEventListener('mouseup', onMouseUp);
+
+    // Écouter mouseup sur window pour capturer même si la souris sort de l'élément
+    window.addEventListener('mouseup', onMouseUp);
 
     if(window.matchMedia){
       const mq = window.matchMedia('(orientation: landscape)');
