@@ -516,11 +516,15 @@
       if(swapped){
         // Timer gros, RC petit
         timeEl.style.fontSize = 'clamp(64px,20vh,220px)';
+        timeEl.style.opacity = '1';
         hrEl.style.fontSize = 'clamp(40px,10vh,100px)';
+        hrEl.style.opacity = '0.7';
       }else{
         // Timer petit, RC gros (par défaut)
         timeEl.style.fontSize = 'clamp(40px,10vh,100px)';
+        timeEl.style.opacity = '0.7';
         hrEl.style.fontSize = 'clamp(64px,20vh,220px)';
+        hrEl.style.opacity = '1';
       }
       // Mise à jour en mode paysage
       if(window.matchMedia && window.matchMedia('(orientation: landscape)').matches){
