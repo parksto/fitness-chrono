@@ -571,17 +571,43 @@
       }
     }
 
-    function onPointer(ev){
-      reset();
-      ev.preventDefault();
+    // Variables pour le swipe à la souris
+    let mouseStartX = 0;
+    let mouseStartY = 0;
+    let isMouseDown = false;
+
+    function onMouseDown(ev){
+      mouseStartX = ev.clientX;
+      mouseStartY = ev.clientY;
+      isMouseDown = true;
+    }
+
+    function onMouseUp(ev){
+      if(!isMouseDown) return;
+      isMouseDown = false;
+
+      const deltaX = ev.clientX - mouseStartX;
+      const deltaY = ev.clientY - mouseStartY;
+
+      // Détection swipe horizontal à la souris
+      if(Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50){
+        toggleSizes();
+        ev.preventDefault();
+      }else if(Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10){
+        // Click simple = reset chrono
+        reset();
+        ev.preventDefault();
+      }
     }
 
     timeEl.addEventListener('touchstart', onTouchStart, {passive:false});
     timeEl.addEventListener('touchend', onTouchEnd, {passive:false});
-    timeEl.addEventListener('mousedown', onPointer);
+    timeEl.addEventListener('mousedown', onMouseDown);
+    timeEl.addEventListener('mouseup', onMouseUp);
     hrEl.addEventListener('touchstart', onTouchStart, {passive:false});
     hrEl.addEventListener('touchend', onTouchEnd, {passive:false});
-    hrEl.addEventListener('mousedown', onPointer);
+    hrEl.addEventListener('mousedown', onMouseDown);
+    hrEl.addEventListener('mouseup', onMouseUp);
 
     if(window.matchMedia){
       const mq = window.matchMedia('(orientation: landscape)');
@@ -593,8 +619,11 @@
     }
 
     window.addEventListener('contextmenu', e=>e.preventDefault());
-    window.addEventListener('keydown', (e)=>{ 
-      if(e.key.toLowerCase()==='r'){ reset(); }
+    window.addEventListener('keydown', (e)=>{
+      if(e.key.toLowerCase()==='r' || e.key === ' '){
+        reset();
+        e.preventDefault(); // Empêcher le scroll avec espace
+      }
       if(e.key.toLowerCase()==='m'){ toggleSettings(); }
     });
 
