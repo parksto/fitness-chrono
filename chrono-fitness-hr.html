@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Chronomètre fitness avec monitoring cardiaque Bluetooth en temps réel" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -34,26 +34,26 @@
     /* Bouton menu hamburger en haut à droite */
     #menuBtn{
       position:fixed;
-      top:12px;
-      right:12px;
-      width:40px;
-      height:40px;
-      border:1px solid rgba(255,255,255,0.3);
+      top:max(16px, env(safe-area-inset-top, 16px));
+      right:max(16px, env(safe-area-inset-right, 16px));
+      width:48px;
+      height:48px;
+      border:2px solid rgba(255,255,255,0.6);
       border-radius:8px;
-      background:transparent;
+      background:rgba(0,0,0,0.5);
       color:#fff;
-      font-size:24px;
+      font-size:28px;
       cursor:pointer;
       display:flex;
       align-items:center;
       justify-content:center;
-      z-index:100;
-      opacity:0.4;
+      z-index:999;
+      opacity:1;
       transition:all 0.3s;
       will-change:transform;
       transform:translateZ(0);
     }
-    #menuBtn:active{background:rgba(255,255,255,0.2);opacity:1}
+    #menuBtn:active{background:rgba(255,255,255,0.3);opacity:1}
 
     /* Cache le menu en mode paysage */
     @media (orientation: landscape){
