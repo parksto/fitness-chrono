@@ -34,26 +34,26 @@
     /* Bouton menu hamburger en haut à droite */
     #menuBtn{
       position:fixed;
-      top:max(16px, env(safe-area-inset-top, 16px));
-      right:max(16px, env(safe-area-inset-right, 16px));
-      width:48px;
-      height:48px;
-      border:2px solid rgba(255,255,255,0.6);
+      top:max(12px, env(safe-area-inset-top, 12px));
+      right:max(12px, env(safe-area-inset-right, 12px));
+      width:40px;
+      height:40px;
+      border:1px solid rgba(255,255,255,0.3);
       border-radius:8px;
-      background:rgba(0,0,0,0.5);
+      background:transparent;
       color:#fff;
-      font-size:28px;
+      font-size:24px;
       cursor:pointer;
       display:flex;
       align-items:center;
       justify-content:center;
-      z-index:999;
-      opacity:1;
+      z-index:100;
+      opacity:0.4;
       transition:all 0.3s;
       will-change:transform;
       transform:translateZ(0);
     }
-    #menuBtn:active{background:rgba(255,255,255,0.3);opacity:1}
+    #menuBtn:active{background:rgba(255,255,255,0.2);opacity:1}
 
     /* Cache le panneau de paramètres en mode paysage */
     @media (orientation: landscape){
