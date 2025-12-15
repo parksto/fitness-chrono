@@ -219,9 +219,12 @@
     /* Dégradé pulsant en arrière-plan */
     .hr::before{
       content:'';
-      position:absolute;
-      width:400%;
-      height:400%;
+      position:fixed;
+      top:50%;
+      left:50%;
+      width:max(120vh, 120vw);
+      height:max(120vh, 120vw);
+      transform:translate(-50%, -50%);
       background:radial-gradient(circle, rgba(255,50,50,0.4) 0%, rgba(255,50,50,0.15) 35%, transparent 60%);
       border-radius:50%;
       z-index:-1;
@@ -232,11 +235,11 @@
     
     @keyframes pulseGlow{
       0%, 100%{
-        transform:scale(0.95);
+        transform:translate(-50%, -50%) scale(0.95);
         opacity:0.6;
       }
       50%{
-        transform:scale(1.1);
+        transform:translate(-50%, -50%) scale(1.1);
         opacity:1;
       }
     }
