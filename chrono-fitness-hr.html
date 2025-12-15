@@ -195,12 +195,13 @@
       line-height:1;
       cursor:pointer;
       opacity:0.7;
+      transition: font-size 0.4s ease-in-out, opacity 0.4s ease-in-out;
     }
     .time{font-size:clamp(40px,10vh,100px)}
     @media (orientation: landscape){
       .time{font-size:clamp(56px,14vh,140px)}
     }
-    
+
     /* Fréquence cardiaque (principale) */
     .hr{
       font-family: 'Sto Fixed', monospace;
@@ -214,6 +215,7 @@
       gap:clamp(12px,2vh,24px);
       position:relative;
       isolation:isolate;
+      transition: font-size 0.4s ease-in-out, opacity 0.4s ease-in-out;
     }
     
     /* Dégradé pulsant en arrière-plan */
