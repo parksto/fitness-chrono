@@ -514,20 +514,78 @@
       }catch(e){}
     }
 
+    // ===== SWIPE POUR ÉCHANGER LES TAILLES =====
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
+    let swapped = false; // État : false = timer petit/RC gros, true = timer gros/RC petit
+
+    function toggleSizes(){
+      swapped = !swapped;
+      if(swapped){
+        // Timer gros, RC petit
+        timeEl.style.fontSize = 'clamp(64px,20vh,220px)';
+        hrEl.style.fontSize = 'clamp(40px,10vh,100px)';
+      }else{
+        // Timer petit, RC gros (par défaut)
+        timeEl.style.fontSize = 'clamp(40px,10vh,100px)';
+        hrEl.style.fontSize = 'clamp(64px,20vh,220px)';
+      }
+      // Mise à jour en mode paysage
+      if(window.matchMedia && window.matchMedia('(orientation: landscape)').matches){
+        if(swapped){
+          timeEl.style.fontSize = 'clamp(80px,32vh,360px)';
+          hrEl.style.fontSize = 'clamp(56px,14vh,140px)';
+        }else{
+          timeEl.style.fontSize = 'clamp(56px,14vh,140px)';
+          hrEl.style.fontSize = 'clamp(80px,32vh,360px)';
+        }
+      }
+    }
+
+    function onTouchStart(ev){
+      const touch = ev.touches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+      touchStartTime = Date.now();
+    }
+
+    function onTouchEnd(ev){
+      const touch = ev.changedTouches[0];
+      const deltaX = touch.clientX - touchStartX;
+      const deltaY = touch.clientY - touchStartY;
+      const deltaTime = Date.now() - touchStartTime;
+
+      // Détection swipe horizontal
+      if(Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50 && deltaTime < 300){
+        // Swipe horizontal détecté
+        toggleSizes();
+        ev.preventDefault();
+      }else if(Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10 && deltaTime < 300){
+        // Tap simple = reset chrono
+        reset();
+        ev.preventDefault();
+      }
+    }
+
     function onPointer(ev){
       reset();
       ev.preventDefault();
     }
 
-    timeEl.addEventListener('touchstart', onPointer, {passive:false});
+    timeEl.addEventListener('touchstart', onTouchStart, {passive:false});
+    timeEl.addEventListener('touchend', onTouchEnd, {passive:false});
     timeEl.addEventListener('mousedown', onPointer);
-    hrEl.addEventListener('touchstart', onPointer, {passive:false});
+    hrEl.addEventListener('touchstart', onTouchStart, {passive:false});
+    hrEl.addEventListener('touchend', onTouchEnd, {passive:false});
     hrEl.addEventListener('mousedown', onPointer);
 
     if(window.matchMedia){
       const mq = window.matchMedia('(orientation: landscape)');
       mq.addEventListener('change', ()=>{
         tryEnterFullscreenIfLandscape();
+        toggleSizes(); // Réappliquer les tailles après changement d'orientation
+        toggleSizes(); // Double toggle pour revenir à l'état actuel mais avec les bonnes tailles
       });
     }
 
@@ -576,8 +634,10 @@
     function updateHR(bpm){
       hrEl.classList.remove('inactive');
       hrValueEl.textContent = bpm;
-      hrEl.style.color = getHRColor(bpm);
-      
+      const color = getHRColor(bpm);
+      hrEl.style.color = color;
+      timeEl.style.color = color;
+
       // Calculer la durée de l'animation en fonction du BPM
       // bpm battements par minute = bpm/60 battements par seconde
       // donc 1 battement prend 60/bpm secondes
@@ -589,6 +649,7 @@
       hrEl.classList.add('inactive');
       hrValueEl.textContent = '---';
       hrEl.style.color = '#fff';
+      timeEl.style.color = '#fff';
       hrEl.style.setProperty('--pulse-duration', '1s');
     }
 
