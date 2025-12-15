@@ -28,7 +28,7 @@
       font-display: swap;
     }
     
-    html,body{height:100%;margin:0;padding:0;background:#000;color:#fff;font-family:'Sto',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,Helvetica,monospace}
+    html,body{height:100%;margin:0;padding:0;background:#000;color:#fff;font-family:'Sto',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,Helvetica,monospace;overflow:hidden}
     body{position:relative;width:100vw;height:100vh}
     
     /* Bouton menu hamburger en haut à droite */
@@ -55,9 +55,8 @@
     }
     #menuBtn:active{background:rgba(255,255,255,0.3);opacity:1}
 
-    /* Cache le menu en mode paysage */
+    /* Cache le panneau de paramètres en mode paysage */
     @media (orientation: landscape){
-      #menuBtn{display:none}
       #settingsPanel{display:none !important}
     }
     
